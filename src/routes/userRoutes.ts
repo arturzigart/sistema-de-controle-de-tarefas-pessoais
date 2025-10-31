@@ -1,12 +1,13 @@
 import { Router} from 'express';
-import { email, show_login } from '../controller/user.controller';
+import { email, login, show_login } from '../controller/user.controllers';
 
-const userRoutes = Router();
+const usuarioRoutes = Router();
 
-userRoutes.get('/user/login', show_login);
-userRoutes.post('/user/email', email);
+usuarioRoutes.get('/usuario/login', show_login);
+usuarioRoutes.post('/usuario/email', email);
+usuarioRoutes.post('/usuario/login', login);
 
 
 export {
-    userRoutes
+    usuarioRoutes
 }

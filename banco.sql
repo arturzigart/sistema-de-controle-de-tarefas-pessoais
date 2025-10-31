@@ -1,14 +1,14 @@
-CREATE TABLE user (
-    id_user SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+CREATE TABLE usuario (
+    id_usuario SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
     create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE categoria (
     id_categoria SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL UNIQUE,
+    nome VARCHAR(50) NOT NULL UNIQUE,
     descricao VARCHAR(150)
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE tarefa (
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     data_limite DATE,
     status VARCHAR(20) DEFAULT 'pendente' CHECK (status IN ('pendente', 'em_andamento', 'concluida')),
-    id_user INT NOT NULL,
+    id_usuario INT NOT NULL,
     id_categoria INT,
     FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario) ON DELETE CASCADE,
     FOREIGN KEY (id_categoria) REFERENCES categoria (id_categoria) ON DELETE SET NULL
