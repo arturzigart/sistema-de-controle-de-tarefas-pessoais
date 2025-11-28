@@ -1,5 +1,7 @@
 import express from 'express';
 import { usuarioRoutes } from './routes/userRoutes';
+import { admRoutes } from './routes/adm_routes';
+import session from 'express-session';
 
 const app = express();
 
@@ -12,8 +14,15 @@ app.use(express.urlencoded({ extended: false }));
 app.get('/', function (req, res) {
     res.redirect('/usuario/login');
 });
+app.use(session({
+ secret: 'aula-pw2',      //chave usada para assinar o cookie
+ resave: false,           //evita salvar a sessão se nada mudou
+ saveUninitialized: true, // salva as sessões não inicializadas
+ cookie: { maxAge: 1 * 1000 * 60 * 60} // uma hora de tempo de expiraçaõ
+}))
 
 app.use(usuarioRoutes)
+app.use(admRoutes)
 
 app.listen(3333, () => {
     console.log('Servidor rodando no endereço http://localhost:3333');

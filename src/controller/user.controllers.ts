@@ -6,7 +6,7 @@ export function show_login(req: Request, res: Response) {
     res.render('login', { response: null })
 }
 
-export async function email(req: Request, res: Response) {
+export async function cadastrar(req: Request, res: Response) {
     const { nome, email, senha } = req.body;
 
     if (!nome || !email || !senha) {
@@ -69,7 +69,11 @@ export async function login(req: Request, res : Response){
         }
     })
   }
-  res.render('dashbord',{
- nome: usuario.nome
-  });
+
+  (req.session as any).usuario = {
+  nome: usuario.nome,
+  email: usuario.email,
+  id: usuario.id
+  }
+  res.redirect('/adm');
 }
