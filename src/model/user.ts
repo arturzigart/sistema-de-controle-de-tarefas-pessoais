@@ -14,7 +14,7 @@ export type Usuario = {
 //essa função insere um usuario no banco
 export async function insert(usuario: Usuario) {
     await connection.query(
-        'INSERT INTO user (nome, emai, senha ) VALUES ($1, $2, $3, $4);',
+        'INSERT INTO usuario (nome, email, senha ) VALUES ($1, $2, $3);',
         [
             usuario.nome,
             usuario.email,
@@ -38,7 +38,7 @@ export async function updateById(usuario: Usuario) {
 }
 export async function getByEmail (email: string) {
     const {rows} =  await connection.query(
-        'SELECT * FROM usuario WHERE email=1$',
+        'SELECT * FROM usuario WHERE email=$1',
         [email]
     );
     return rows[0];
@@ -47,7 +47,7 @@ export async function getByEmail (email: string) {
 
 export async function getByEmailandSenha (email: string, senha: string) {
     const {rows} =  await connection.query(
-        'SELECT * FROM usuario WHERE email=1$ and senha=$2',
+        'SELECT * FROM usuario WHERE email=$1 and senha=$2',
         [email, senha]
     );
     return rows[0];
